@@ -1,0 +1,925 @@
+/* ==========================================================================
+   AIPS MUN 2026 - DIPLOMATIC LUXURY DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  --bg-deep: #030611;
+  --bg-primary: #070d1e;
+  --bg-surface: #0e172e;
+  --bg-card: rgba(13, 22, 45, 0.78);
+  --bg-card-hover: rgba(19, 31, 64, 0.9);
+  
+  --gold-deep: #b8933b;
+  --gold-bright: #f3d78a;
+  --gold-glow: rgba(212, 175, 55, 0.45);
+  --gold-foil: linear-gradient(135deg, #fff3b0 0%, #d4af37 45%, #947116 100%);
+  
+  --border-diplomatic: rgba(212, 175, 55, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  
+  --text-white: #f8fafc;
+  --text-slate: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --shadow-gold: 0 10px 30px -10px rgba(212, 175, 55, 0.3);
+  --shadow-card: 0 20px 45px -15px rgba(0, 0, 0, 0.75);
+}
+
+/* Base Resets & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+h1, h2, h3, h4, .font-formal {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 1px;
+}
+
+.font-serif-body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Background Atmosphere */
+.bg-canvas-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Enlarged Background UN Watermark */
+.bg-un-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 850px;
+  background-image: url('image_2.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 50px rgba(212, 175, 55, 0.2));
+}
+
+/* Top Notification Strip */
+.top-strip {
+  background: #02040a;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 8px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  backdrop-filter: blur(10px);
+}
+
+.top-strip span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-strip .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-deep);
+  box-shadow: 0 0 8px var(--gold-bright);
+}
+
+/* Navigation Bar */
+nav.navbar {
+  position: fixed;
+  top: 33px;
+  left: 0;
+  width: 100%;
+  height: 88px;
+  background: rgba(7, 13, 30, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-diplomatic);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-brand:hover {
+  transform: scale(1.02);
+}
+
+/* Enlarge Navbar Logo */
+.nav-logo-slot {
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px var(--gold-glow));
+}
+
+.nav-logo-slot img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.nav-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-title-main {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-title-sub {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.nav-item {
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--text-slate);
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--gold-bright);
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-foil);
+  box-shadow: 0 0 10px var(--gold-bright);
+}
+
+/* Diplomatic Buttons */
+.btn-gold {
+  background: var(--gold-foil);
+  color: #040711 !important;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(184, 147, 59, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 8px 32px rgba(243, 215, 138, 0.6);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.btn-outline-gold {
+  background: rgba(14, 23, 46, 0.6);
+  border: 1.5px solid var(--border-diplomatic);
+  color: var(--gold-bright);
+  font-family: 'Cinzel', serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline-gold:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-bright);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Page Host / Router View */
+main.page-host {
+  padding-top: 120px;
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 120px);
+}
+
+.tab-view {
+  display: none;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.tab-view.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section & Large Heraldry */
+.hero-section {
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 6rem;
+}
+
+.hero-heraldry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 2.5rem;
+}
+
+/* ENLARGED HERO LOGOS */
+.hero-crest {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 28px rgba(212, 175, 55, 0.55));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-un-crest {
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(65, 137, 221, 0.45));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-crest:hover, .hero-un-crest:hover {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.diplomatic-title {
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 900;
+  line-height: 1.12;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  letter-spacing: 2.5px;
+}
+
+.foil-text {
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  text-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--text-slate);
+  font-style: italic;
+  margin-bottom: 3rem;
+  max-width: 820px;
+  line-height: 1.8;
+}
+
+/* Live Countdown Dials */
+.countdown-cluster {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 3.5rem;
+}
+
+.dial-card {
+  width: 100px;
+  height: 108px;
+  background: rgba(11, 18, 38, 0.88);
+  border: 1.5px solid var(--border-diplomatic);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.dial-card .num {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--gold-bright);
+  line-height: 1;
+}
+
+.dial-card .lbl {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Content Container & Headings */
+.content-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 2rem 7rem;
+}
+
+.formal-heading-box {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.formal-heading-box .eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 3.5px;
+  color: var(--gold-deep);
+  font-weight: 800;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.formal-heading-box .main-heading {
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+/* Official Communiqué / Invitation Letter */
+.sec-letter-card {
+  background: rgba(14, 22, 44, 0.82);
+  border: 1.5px solid var(--border-diplomatic);
+  border-radius: 14px;
+  padding: 4rem;
+  backdrop-filter: blur(25px);
+  box-shadow: var(--shadow-card), 0 0 35px rgba(212, 175, 55, 0.08);
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.sec-letter-card::before {
+  content: "OFFICIAL COMMUNIQUÉ";
+  position: absolute;
+  top: 22px;
+  left: 4rem;
+  font-size: 0.7rem;
+  letter-spacing: 2.5px;
+  color: var(--gold-deep);
+  font-weight: 800;
+}
+
+.sec-letter-text {
+  font-size: 1.22rem;
+  color: #e2e8f0;
+  line-height: 1.9;
+  margin-top: 1.8rem;
+}
+
+/* COMMITTEES GRID & ENLARGED LOGOS */
+.committees-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
+}
+
+.comm-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2.4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(25px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+
+.comm-card:hover {
+  border-color: var(--gold-bright);
+  transform: translateY(-8px);
+  background: var(--bg-card-hover);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+.comm-top-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 1.8rem;
+}
+
+/* ENLARGED COMMITTEE LOGO FRAME */
+.comm-logo-frame {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  background: radial-gradient(circle, rgba(14, 24, 52, 0.95) 0%, rgba(5, 9, 20, 0.95) 100%);
+  border: 1.5px solid var(--border-diplomatic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.15);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.comm-card:hover .comm-logo-frame {
+  transform: scale(1.06);
+  border-color: var(--gold-bright);
+}
+
+.comm-logo-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+}
+
+.comm-code {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--gold-bright);
+  line-height: 1.1;
+}
+
+.comm-scope-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.comm-formal-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.4rem;
+  min-height: 60px;
+}
+
+.comm-agenda-box {
+  background: rgba(4, 8, 18, 0.85);
+  border-left: 3px solid var(--gold-deep);
+  padding: 14px 18px;
+  margin-bottom: 1.6rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.agenda-heading {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold-deep);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.agenda-statement {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.comm-board-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.2rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.9rem;
+}
+
+.comm-board-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.comm-board-row strong {
+  color: #f1f5f9;
+}
+
+/* Secretariat Profiles */
+.sec-roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.2rem;
+}
+
+.sec-official-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-diplomatic);
+  border-radius: 16px;
+  padding: 2.8rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: all 0.35s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.sec-official-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold-bright);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+.official-insignia {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-deep);
+  background: radial-gradient(circle, #162447 0%, #060b18 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  box-shadow: 0 0 24px var(--gold-glow);
+}
+
+.official-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.official-title {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold-bright);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.official-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Schedule Tabs & Timeline */
+.sched-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 3.5rem;
+}
+
+.sched-tab-btn {
+  padding: 12px 28px;
+  border: 1.5px solid var(--border-diplomatic);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sched-tab-btn.active {
+  background: var(--gold-foil);
+  color: #040711;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+}
+
+.schedule-ledger {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-diplomatic);
+  border-radius: 18px;
+  padding: 3.5rem;
+  backdrop-filter: blur(25px);
+  box-shadow: var(--shadow-card);
+}
+
+.ledger-row {
+  display: flex;
+  gap: 2.5rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ledger-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ledger-time {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.ledger-detail h4 {
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ledger-detail p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Admissions Portal & Dormant Box */
+.portal-box {
+  max-width: 940px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 20px;
+  padding: 4.5rem 3.5rem;
+  text-align: center;
+  backdrop-filter: blur(25px);
+  box-shadow: var(--shadow-card), 0 0 45px rgba(212, 175, 55, 0.15);
+}
+
+.form-container-shell {
+  margin-top: 3.5rem;
+  padding: 3.5rem 2rem;
+  border: 2px dashed var(--border-diplomatic);
+  background: rgba(3, 7, 18, 0.85);
+  border-radius: 14px;
+}
+
+.form-container-shell img {
+  width: 95px !important;
+  height: 95px !important;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.4));
+}
+
+/* Interactive Modal Window */
+.modal-veil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(2, 5, 14, 0.88);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-veil.open {
+  display: flex;
+}
+
+.modal-card {
+  background: #090f22;
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 18px;
+  max-width: 660px;
+  width: 100%;
+  padding: 3.5rem;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.2);
+  animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-card .close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-card .close-btn:hover {
+  color: #fff;
+}
+
+/* Enlarged Modal Emblem Frame */
+.modal-card .comm-logo-frame {
+  width: 80px;
+  height: 80px;
+}
+
+/* Footer & Enlarged Footer Logos */
+footer {
+  border-top: 1px solid rgba(212, 175, 55, 0.18);
+  background: #02050e;
+  padding: 4.5rem 5% 3.5rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+footer img {
+  height: 52px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+  transition: transform 0.3s;
+}
+
+footer img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Rules */
+@media (max-width: 860px) {
+  nav.navbar { padding: 0 1.5rem; }
+  .nav-menu { display: none; }
+  .top-strip { display: none; }
+  main.page-host { padding-top: 88px; }
+  .hero-crest { width: 100px; height: 100px; }
+  .hero-un-crest { width: 90px; height: 90px; }
+  .sec-letter-card { padding: 2.5rem 1.8rem; }
+  .sec-letter-card::before { left: 1.8rem; }
+  .ledger-row { flex-direction: column; gap: 8px; }
+  .ledger-time { width: auto; }
+  .portal-box { padding: 3rem 1.5rem; }
+  .countdown-cluster { gap: 8px; }
+  .dial-card { width: 75px; height: 85px; }
+  .dial-card .num { font-size: 1.8rem; }
+}
+
+/* ==========================================================================
+   COMMITTEE FRAMES & TARGETED IMAGE SCALING
+   ========================================================================== */
+
+/* 1. Revert the frame container back to OG size */
+.comm-top-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 1.8rem;
+}
+
+.comm-logo-frame {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  background: radial-gradient(circle, rgba(14, 24, 52, 0.95) 0%, rgba(5, 9, 20, 0.95) 100%);
+  border: 1.5px solid var(--border-diplomatic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.15);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  overflow: visible; /* Allows the scaled image to pop cleanly */
+}
+
+/* Default sizing for standard committee images (ECOSOC, UNSC, IP) */
+.comm-logo-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+  transition: transform 0.3s ease;
+}
+
+/* 2. Scale UP the images of CCC (image_4.png) and HRC (image_6.png) alone */
+.comm-logo-frame img[src*="image_4"],
+.comm-logo-frame img[src*="image_6"] {
+  transform: scale(1.4);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
+}
+
+/* Hover boost on card */
+.comm-card:hover .comm-logo-frame {
+  transform: scale(1.06);
+  border-color: var(--gold-bright);
+}
+
+.comm-card:hover .comm-logo-frame img[src*="image_4"],
+.comm-card:hover .comm-logo-frame img[src*="image_6"] {
+  transform: scale(1.48);
+}
+
+/* Optical balance and vertical alignment for CCC and UNHRC */
+.comm-logo-frame img.logo-enlarge {
+  transform: translateY(4px) scale(1.55) !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* Hover elevation with offset maintained */
+.comm-card:hover .comm-logo-frame img.logo-enlarge {
+  transform: translateY(4px) scale(1.65) !important;
+}
